@@ -1,0 +1,49 @@
+      # Certificado de ARCA (busqueda por CUIT): sale de los secretos cifrados de GitHub,
+      # nunca del repo. Viaja solo por la entrada estandar de ssh y queda en $DIR/.arca/
+      # legible unicamente por el usuario del servicio. Si los secretos no existen, no hace nada.
+      - name: Certificado de ARCA
+        env:
+          ARCA_CERT_B64: ${{ secrets.ARCA_CERT_B64 }}
+          ARCA_KEY_B64: ${{ secrets.ARCA_KEY_B64 }}
+          DIR: ${{ steps.env.outputs.dir }}
+          SVC_USER: ${{ steps.env.outputs.user }}
+        run: |
+          if [ -z "$ARCA_CERT_B64" ] || [ -z "$ARCA_KEY_B64" ]; then
+            echo "Sin secretos de ARCA: se deja como esta"
+            exit 0
+          fi
+          printf '%s' "$ARCA_CERT_B64" | ssh -o BatchMode=yes "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
+            "sudo -u $SVC_USER bash -c 'umask 077 && mkdir -p $DIR/.arca && base64 -d > $DIR/.arca/cert.pem'"
+          printf '%s' "$ARCA_KEY_B64" | ssh -o BatchMode=yes "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
+            "sudo -u $SVC_USER bash -c 'umask 077 && base64 -d > $DIR/.arca/key.pem'"
+          echo "Certificado de ARCA actualizado en $DIR/.arca"
+
+      # Factura electronica (wsfe). Candado: SOLO produccion (rama main) tiene la marca
+      # .arca/wsfe-produccion, que habilita emitir comprobantes REALES con el certificado de arriba.
+      # Cualquier otra rama la borra y emite contra el ambiente de PRUEBA de ARCA (homologacion) con
+      # su propio certificado (secretos ARCA_HOMO_CERT_B64 / ARCA_HOMO_KEY_B64); sin esos secretos,
+      # la emision queda apagada. Asi dev-finanzas nunca puede emitir una factura real.
+      - name: Factura electronica de ARCA
+        env:
+          ARCA_HOMO_CERT_B64: ${{ secrets.ARCA_HOMO_CERT_B64 }}
+          ARCA_HOMO_KEY_B64: ${{ secrets.ARCA_HOMO_KEY_B64 }}
+          DIR: ${{ steps.env.outputs.dir }}
+          SVC_USER: ${{ steps.env.outputs.user }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          REMOTE="${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}"
+          if [ "$BRANCH" = "main" ]; then
+            ssh -n -o BatchMode=yes "$REMOTE" "sudo -u $SVC_USER bash -c 'umask 077 && mkdir -p $DIR/.arca && touch $DIR/.arca/wsfe-produccion'"
+            echo "Produccion: factura electronica REAL habilitada"
+            exit 0
+          fi
+          ssh -n -o BatchMode=yes "$REMOTE" "sudo -u $SVC_USER bash -c 'rm -f $DIR/.arca/wsfe-produccion'"
+          if [ -z "$ARCA_HOMO_CERT_B64" ] || [ -z "$ARCA_HOMO_KEY_B64" ]; then
+            echo "Sin certificado de homologacion: la factura electronica queda apagada en $BRANCH"
+            exit 0
+          fi
+          printf '%s' "$ARCA_HOMO_CERT_B64" | ssh -o BatchMode=yes "$REMOTE" \
+            "sudo -u $SVC_USER bash -c 'umask 077 && mkdir -p $DIR/.arca/homo && base64 -d > $DIR/.arca/homo/cert.pem'"
+          printf '%s' "$ARCA_HOMO_KEY_B64" | ssh -o BatchMode=yes "$REMOTE" \
+            "sudo -u $SVC_USER bash -c 'umask 077 && base64 -d > $DIR/.arca/homo/key.pem'"
+          echo "Factura electronica de PRUEBA (homologacion ARCA) habilitada en $BRANCH"
