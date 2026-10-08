@@ -1,0 +1,62 @@
+/* Recorrido guiado (tour-engine.js). Solo tokens del DS; reutiliza .btn, .icon-btn, .progress, .count, .link.
+   Capas: por debajo de los modales (80) y los toasts (90) del DS. */
+
+.tour [hidden]{display:none!important}
+.tour-hole{position:fixed;z-index:70;border-radius:var(--radius-md);pointer-events:none;
+  box-shadow:0 0 0 9999px rgba(20,19,17,.5);outline:2px dashed var(--fuego-300);outline-offset:3px;
+  transition:top var(--duration-slow) var(--ease-out),left var(--duration-slow) var(--ease-out),width var(--duration-slow) var(--ease-out),height var(--duration-slow) var(--ease-out)}
+
+.tour-card{position:fixed;z-index:75;width:min(380px,calc(100vw - 24px));display:grid;gap:var(--space-3);
+  padding:var(--space-5);border-radius:var(--radius-lg);background:var(--color-bg-surface-raised);box-shadow:var(--elevation-4);
+  border-top:4px solid var(--color-action-primary);animation:tourIn var(--duration-slow) var(--ease-stamp) both}
+.tour-card.is-center{top:50%;left:50%;width:min(480px,calc(100vw - 24px));transform:translate(-50%,-50%);
+  box-shadow:var(--elevation-4),0 0 0 100vmax rgba(20,19,17,.5)}
+@keyframes tourIn{from{opacity:0;translate:0 8px}}
+.tour-card__top{display:flex;justify-content:space-between;align-items:center;margin:-6px -8px -4px 0}
+.tour-card__top .t-overline{color:var(--color-text-brand)}
+.tour-card h3{margin:0;font:var(--text-heading-3)}
+.tour-card.is-center h3{font:var(--text-heading-2);font-stretch:104%}
+.tour-card__body p{margin:0 0 var(--space-2);color:var(--color-text-secondary);font:var(--text-body-sm)}
+.tour-card.is-center .tour-card__body p{font:var(--text-body)}
+.tour-card__body p:last-child{margin-bottom:0}
+.tour-card .progress{height:6px}
+.tour-try{display:flex;gap:8px;align-items:flex-start;padding:var(--space-3);border-radius:var(--radius-md);
+  background:var(--color-bg-brand-soft);color:var(--color-text-brand);font:var(--text-body-sm)}
+.tour-try .ico{margin-top:2px;flex:none;animation:tourNudge 1.4s var(--ease-in-out) infinite}
+@keyframes tourNudge{50%{transform:translateX(4px)}}
+.tour-card__actions{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap}
+.tour-card__sp{flex:1}
+.tour.is-paused .tour-hole,.tour.is-paused .tour-card{display:none}
+
+/* Botón flotante y panel de misiones */
+.tour-fab{position:fixed;z-index:60;right:20px;bottom:20px;display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 16px 0 14px;
+  border:0;border-radius:var(--radius-full);background:var(--color-bg-inverse);color:var(--color-text-inverse);box-shadow:var(--elevation-3);
+  cursor:pointer;font:650 .9375rem/1 var(--font-sans);transition:transform var(--duration-fast) var(--ease-out)}
+.tour-fab:hover{transform:translateY(-2px)}
+.tour-fab .count{margin-left:2px}
+.tour-fab.is-done .ico{color:var(--verde-300)}
+.tour-panel{position:fixed;z-index:65;right:20px;bottom:80px;width:min(360px,calc(100vw - 24px));max-height:calc(100vh - 110px);overflow-y:auto;
+  display:grid;gap:var(--space-3);padding:var(--space-5);border-radius:var(--radius-lg);background:var(--color-bg-surface-raised);
+  border:1px solid var(--color-border-default);box-shadow:var(--elevation-4);animation:tourIn var(--duration-slow) var(--ease-out) both}
+.tour-panel__head{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-2)}
+.tour-panel__head .t-overline{color:var(--color-text-brand)}
+.tour-panel__head h3{margin:4px 0 0;font:var(--text-heading-3)}
+.tour-panel__head .icon-btn{margin:-8px -8px 0 0}
+.tour-panel__lead{margin:0;font:var(--text-body-sm);color:var(--color-text-secondary)}
+.tour-missions{list-style:none;margin:0;padding:0;display:grid}
+.tour-missions li{display:flex;align-items:center;gap:var(--space-3);padding:10px 0;border-bottom:1px dashed var(--color-border-default);font-size:.9375rem}
+.tour-missions li:last-child{border-bottom:0}
+.tour-missions__ck{width:22px;height:22px;flex:none;border-radius:var(--radius-xs);border:1.5px solid var(--color-border-strong);display:grid;place-items:center}
+.tour-missions li.is-done .tour-missions__ck{background:var(--color-border-success);border-color:var(--color-border-success);color:#fff}
+.tour-missions li.is-done .tour-missions__txt{color:var(--color-text-muted);text-decoration:line-through}
+.tour-missions__txt{flex:1}
+.tour-missions .link{border:0;padding:0;background-color:transparent;cursor:pointer;font:600 .875rem/1 var(--font-sans);white-space:nowrap}
+.tour-panel__actions{display:grid;gap:var(--space-2);justify-items:center}
+
+@media (max-width:640px){
+  .tour-card:not(.is-center){left:12px;right:12px;bottom:12px;width:auto}
+  .tour-fab{right:12px;bottom:12px}
+  .tour-fab span:not(.count){display:none}
+  .tour-panel{right:12px;bottom:72px}
+}
+@media (prefers-reduced-motion:reduce){.tour-try .ico{animation:none}}

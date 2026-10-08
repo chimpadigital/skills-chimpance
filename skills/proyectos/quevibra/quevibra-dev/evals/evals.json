@@ -1,0 +1,56 @@
+{
+  "skill_name": "quevibra-dev",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "ficha-volver-chico",
+      "prompt": "En el celu, en la ficha de un evento, el botoncito de 'Volver' es re chiquito, cuesta un montón tocarlo con el dedo. Arreglalo.",
+      "expected_output": "Arreglo real en un worktree propio: el 'Volver' de /evento/:slug en celular queda >= 44 px sin romper la compu; chequeo automático en verde contra la línea base; verificado en el navegador en 390 y 360 con medición; commit/PR/reporte en lenguaje de negocio con lo que no se pudo probar; sin push.",
+      "files": [],
+      "assertions": [
+        "Trabajó en un worktree/copia propia con rama dedicada, sin tocar GitRepo/quevibra-main",
+        "El diff deja el botón Volver de la ficha de evento con al menos 44 px de alto táctil en celular",
+        "El cambio no empeora la compu: está acotado a celular o se verificó el tamaño escritorio",
+        "Corrió tipos (tsc), la suite de tests y el build, y reporta resultados distinguiendo fallas viejas de main vs nuevas",
+        "Verificó en el navegador en tamaño celular (390 y/o 360 px) midiendo el botón real",
+        "No hizo push ni abrió PR (la rama no existe en origin)",
+        "El reporte a Santiago está en lenguaje de negocio, sin jerga, y dice qué se probó y qué no",
+        "La descripción del PR apunta a main e incluye una sección de cómo se probó"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "edad-minima-plan",
+      "prompt": "Quiero sumar la edad mínima a los eventos (apto todo público, +13, +18) y que en Explorar se pueda filtrar por eso. Antes de programar nada contame cómo lo harías.",
+      "expected_output": "Plan sin código: avisa que toca shared/schema.ts y pide OK; explica el impacto de db:push al publicar; no inventa la edad cuando la fuente no la trae (sin dato ≠ apto todo público); UX del filtro con estados vacíos; formulario vivo del organizador y del admin; plan de pruebas; recomendación clara y pocas preguntas; en criollo.",
+      "files": [],
+      "assertions": [
+        "Avisa que hay que tocar shared/schema.ts (la base) y pide el OK de Santiago antes de hacerlo",
+        "Explica qué pasa con la base al publicar (Replit corre db:push) y que agregar un campo opcional no borra datos",
+        "No asume apto todo público cuando la fuente no trae la edad: distingue un valor sin dato",
+        "Ubica dónde se carga el dato: formulario vivo del organizador (pages/organizador) y/o editor del admin, y qué pasa con los scrapers",
+        "Diseña el filtro con el caso sin resultados con una salida (no callejón sin salida)",
+        "Incluye un plan de pruebas con automáticas y recorrido en el navegador en celular",
+        "Da una recomendación clara y hace como máximo 3 preguntas a Santiago",
+        "El reporte a Santiago evita jerga técnica innecesaria",
+        "No escribió código ni modificó el repo"
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "passline-cero",
+      "prompt": "Me dijeron que Passline no está trayendo eventos hace unos días pero en el admin figura todo en verde. Fijate qué pasa y arreglalo si hace falta.",
+      "expected_output": "Diagnóstico con datos: cuenta eventos por source en la API pública de producción, corre el scraper/parser en local, conoce la falla silenciosa (0 eventos = OK) y, si hay que arreglar, hace que la falla se vea y prueba con fixtures; reporte honesto en criollo; sin push.",
+      "files": [],
+      "assertions": [
+        "Midió el estado real en producción contando eventos por source en la API pública",
+        "Corrió el scraper o su parser en local contra el sitio real, o inspeccionó el sitio, para diagnosticar",
+        "Conoce o identifica la falla silenciosa: un scraper con 0 eventos figura OK/verde",
+        "Si hubo arreglo: el scraper ahora falla de forma visible y hay tests con fixtures que lo cubren",
+        "Si hubo arreglo: corrió tipos, tests y build sin fallas nuevas",
+        "No hizo push ni escribió en producción",
+        "Reporte en criollo y honesto: qué pasaba, qué hizo, qué no pudo verificar"
+      ]
+    }
+  ]
+}

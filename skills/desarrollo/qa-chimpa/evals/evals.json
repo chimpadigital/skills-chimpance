@@ -1,0 +1,43 @@
+{
+  "skill_name": "qa-chimpa",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "En Comunidad Emprendedora vamos a sumar la carga de logo y hasta 6 fotos del emprendimiento (back Laravel con endpoints multipart, front Next.js que achica la imagen antes de subirla). Antes de que alguien escriba una línea, armame el plan de QA: qué casos hay que probar, en qué capa va cada uno, qué comandos se corren y qué me vas a mostrar para darlo por terminado. No toques código.",
+      "expected_output": "Plan de casos por capa (API con base real, contrato/oráculo/spec, e2e contra back real en celular y escritorio, usabilidad, exploratoria), con casos de tipo real por contenido, peso límite y +1, dimensiones, reemplazo borra el viejo, borrado ajeno, servido con headers, cuenta suspendida, tope de body 413, progreso y errores en el front; comandos exactos del proyecto; definición de terminado y formato de informe con 'qué no se probó'.",
+      "files": [],
+      "assertions": [
+        "Asigna cada caso a una capa concreta (API/feature con base real, contrato, e2e, usabilidad o exploratoria)",
+        "Incluye validar el tipo real por contenido (un archivo renombrado a .jpg se rechaza)",
+        "Incluye el límite de peso exacto y apenas arriba del límite",
+        "Incluye permisos: sin sesión, foto de otro usuario y cuenta suspendida",
+        "Incluye la privacidad de los metadatos de la foto (GPS/EXIF)",
+        "Incluye e2e en celular de 390 px contra el back real",
+        "Da comandos exactos del proyecto (php artisan test, pint, composer openapi o pnpm test:e2e:real)",
+        "Incluye regenerar o verificar el contrato (spec OpenAPI o tipos del front)",
+        "Define qué se muestra para darlo por terminado, con una sección de lo que no se probó"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "che, ¿la ficha pública del emprendimiento ya está lista? mañana tengo reunión con la gente del banco y la quiero mostrar desde el celu. fijate y decime. (el ambiente de prueba está en 127.0.0.1:3200; no toques código ni resetees nada)",
+      "expected_output": "Verificación ejecutada (no solo lectura de código): tests del front corridos, recorrido real en el ambiente de prueba con Playwright en 390 px y escritorio, ficha con y sin contacto, 404, título/OG; informe en el formato del skill, sin redondear para arriba, con qué no se probó (p. ej. iPhone real, datos reales del banco, producción sigue en Express) y riesgos para la demo.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Un usuario de Comunidad dice que no puede entrar con su CUIT si lo escribe con guiones (20-30111222-0). Antes de arreglar nada, decime cómo lo reproducirías y qué test escribirías primero. No toques código.",
+      "expected_output": "Reproducción concreta (en qué capa: unit/API/e2e), test que falla primero con nombre que describe la regla, casos vecinos (DNI con puntos, espacios, CUIT sin guiones, CUIT inválido), dónde vive la normalización (front y/o back) y cómo se verifica el arreglo con la batería completa. Primero un test chico de cada lado (unitario de la normalización del front y API del back) y después el e2e que los une.",
+      "files": [],
+      "assertions": [
+        "Lee el código real y dice dónde se normaliza o se valida el documento (front, back o ambos)",
+        "Propone reproducirlo primero en la capa más baja que alcanza (API/feature o unitario) antes que e2e",
+        "Propone escribir primero un test que falla, con un nombre que describe la regla",
+        "Usa un CUIT válido (dígito verificador correcto) en el caso de prueba o advierte que debe serlo",
+        "Lista casos vecinos: sin guiones, con puntos o espacios, DNI y CUIT inválido",
+        "Dice cómo se verifica el arreglo después: batería completa además del test nuevo",
+        "No modifica código"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotización · MT AGRO — Chimpancé Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0A0A; --bg-2:#121310; --bg-3:#1a1b17;
+  --line:rgba(255,255,255,.10); --line-soft:rgba(255,255,255,.06);
+  --lime:#D9F45F; --sky:#36A9E1;
+  --txt:#F4F5F0; --txt-2:#a9ada0; --txt-3:#6f7268;
+  --font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  --container:1040px; --r:20px; --r-sm:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.55;-webkit-font-smoothing:antialiased}
+body::after{
+  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{max-width:var(--container);margin:0 auto;padding:48px 24px 70px}
+h1,h2,h3,h4{letter-spacing:-.02em;line-height:1.12;font-weight:800}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--txt-3);font-weight:700}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;border:0;
+  width:100%;font-family:inherit;font-weight:700;font-size:15px;border-radius:12px;padding:14px 20px;
+  text-decoration:none;transition:.18s ease}
+.btn-primary{background:var(--lime);color:#0A0A0A}
+.btn-primary:hover{background:#e6ff77;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--txt);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--lime);color:var(--lime)}
+
+/* ===== Apertura narrativa (breve) ===== */
+.hook{margin-bottom:34px;padding:30px 0 4px;position:relative}
+.hook::before{content:"";position:absolute;top:-40px;left:-80px;width:50vw;height:50vw;max-width:520px;max-height:520px;
+  background:radial-gradient(circle,rgba(54,169,225,.14),transparent 60%);filter:blur(40px);pointer-events:none;z-index:0}
+.hook-inner{position:relative;z-index:1}
+.hook .eyebrow{margin-bottom:16px}
+.hook-line{font-size:clamp(19px,3.4vw,27px);font-weight:800;letter-spacing:-.02em;line-height:1.28}
+.hook-line .dim{color:var(--txt-3);display:block}
+.hook-line .glow{color:var(--lime);display:block;margin-top:4px}
+
+/* ===== Encabezado ===== */
+.top{margin-bottom:28px;max-width:640px}
+.top .eyebrow{margin-bottom:12px}
+.top h1{font-size:clamp(28px,4.5vw,38px)}
+.top .lead{margin-top:14px;color:var(--txt-2);font-size:16px}
+.scope-badge{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:12.5px;font-weight:700;
+  color:var(--sky);background:rgba(54,169,225,.12);border:1px solid rgba(54,169,225,.25);
+  padding:7px 14px;border-radius:999px}
+
+/* ===== Logos / referentes del sector ===== */
+.trust{margin-bottom:44px}
+.trust-label{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt-3);
+  font-weight:700;margin-bottom:16px;text-align:center}
+.trust-logos{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.logo-badge{display:flex;align-items:center;justify-content:center;height:56px;padding:0 24px;
+  background:var(--bg-2);border:1px solid var(--line);border-radius:12px;
+  font-size:13.5px;font-weight:800;letter-spacing:.02em;color:var(--txt-2)}
+
+.sec-head{margin-bottom:26px;max-width:640px}
+.sec-head .eyebrow{margin-bottom:8px}
+.sec-head h2{font-size:clamp(22px,3.5vw,28px)}
+.sec-head p{margin-top:8px;color:var(--txt-2);font-size:14.5px}
+section{margin-bottom:52px}
+
+/* ===== Mapa del flujo ===== */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.flow-step{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;
+  background:var(--bg-2);border:1px solid var(--line);border-radius:16px;padding:22px 14px 20px;
+  font-size:12.5px;color:var(--txt-2);line-height:1.4}
+.flow-step b{color:var(--txt);font-size:13px}
+.flow-step .n{width:36px;height:36px;flex:0 0 36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(54,169,225,.5);background:rgba(54,169,225,.12);color:var(--sky);font-weight:800;font-size:15px}
+.flow-step.last{border-color:rgba(217,244,95,.45);background:linear-gradient(165deg,rgba(217,244,95,.07),var(--bg-2))}
+.flow-step.last .n{border-color:rgba(217,244,95,.6);background:rgba(217,244,95,.14);color:var(--lime)}
+.flow-step:not(:last-child)::after{content:"→";position:absolute;top:50%;right:-13px;transform:translateY(-50%);
+  color:var(--txt-3);font-size:15px;font-weight:700;z-index:2}
+
+/* ===== Pricing cards ===== */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.price-card{position:relative;display:flex;flex-direction:column;background:var(--bg-2);
+  border:1.5px solid var(--line);border-radius:var(--r);padding:28px 24px}
+.price-card.featured{border-color:var(--lime);background:linear-gradient(165deg,rgba(217,244,95,.08),var(--bg-2) 55%);
+  box-shadow:0 16px 40px rgba(217,244,95,.08)}
+.price-badge{position:absolute;top:-13px;left:24px;background:var(--lime);color:#0A0A0A;font-size:11px;
+  font-weight:800;padding:5px 14px;border-radius:999px}
+.price-off{position:absolute;top:20px;right:20px;font-size:10.5px;font-weight:700;color:var(--sky);
+  background:rgba(54,169,225,.12);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.price-name{font-size:19px;font-weight:800;margin-bottom:6px}
+.price-desc{font-size:13px;color:var(--txt-2);margin-bottom:18px;min-height:34px}
+.price-num{display:flex;align-items:baseline;gap:6px}
+.price-num .usd{font-size:34px;font-weight:800;letter-spacing:-.02em}
+.price-num .per{font-size:13px;color:var(--txt-3);font-weight:600}
+.price-iva{font-size:11.5px;color:var(--txt-3);margin-top:2px;margin-bottom:16px}
+.price-ads{font-size:12.5px;color:var(--txt-2);margin-bottom:18px;padding:10px 12px;background:var(--bg);
+  border:1px solid var(--line-soft);border-radius:10px}
+.price-ads b{color:var(--txt)}
+.price-fine{font-size:12px;color:var(--txt-2);margin-top:12px;line-height:1.5}
+.price-fine b{color:var(--txt)}
+.price-fine .off{color:var(--lime);font-weight:700}
+.price-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-top:20px;padding-top:20px;
+  border-top:1px solid var(--line-soft);flex:1}
+.price-list li{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--txt-2);line-height:1.4}
+.price-list li b{color:var(--txt);font-weight:600}
+.price-list .ico{flex:0 0 16px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:10px;font-weight:900;margin-top:1px}
+.price-list .yes .ico{background:rgba(217,244,95,.16);color:var(--lime)}
+.price-list .no{color:var(--txt-3)}
+.price-list .no .ico{background:rgba(255,255,255,.06);color:var(--txt-3)}
+
+/* ===== Nota addon ===== */
+.addon-note{margin-top:22px;font-size:13.5px;color:var(--txt-2);text-align:center}
+.addon-note b{color:var(--txt)}
+
+/* ===== Web One Page + CRM ===== */
+.landing-card{max-width:680px;background:var(--bg-2);border:1.5px solid var(--line);border-radius:var(--r);padding:28px}
+.landing-list{margin-top:16px;padding-top:18px;border-top:1px solid var(--line-soft);margin-bottom:22px}
+
+/* ===== Calculadora ===== */
+.calc{background:linear-gradient(160deg,var(--bg-2),#0d0e0b);border:1.5px solid var(--lime);border-radius:24px;
+  padding:30px 28px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.calc-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:34px}
+.calc-label{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--txt);font-weight:700;margin-bottom:10px}
+.calc-label .n{width:26px;height:26px;flex:0 0 26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:1.5px solid rgba(54,169,225,.5);background:rgba(54,169,225,.12);color:var(--sky);font-weight:800;font-size:12.5px}
+.calc-group{margin-bottom:22px}
+.seg{display:flex;gap:5px;background:var(--bg);border:1px solid var(--line-soft);border-radius:14px;padding:5px}
+.seg-btn{flex:1;border:0;background:transparent;color:var(--txt-2);font-family:inherit;font-weight:700;
+  font-size:13px;padding:11px 4px;border-radius:10px;cursor:pointer;transition:.15s;
+  display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2}
+.seg-btn small{font-size:10px;color:var(--txt-3);font-weight:600}
+.seg-btn.active{background:var(--bg-3);color:var(--txt)}
+.seg-btn.active small{color:var(--sky)}
+.seg-btn .off{font-size:10.5px;font-weight:800;color:var(--lime)}
+.tier-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg);
+  border:1.5px solid var(--line-soft);border-radius:14px;padding:12px 16px;cursor:pointer;transition:.15s;margin-bottom:8px}
+.tier-row:last-child{margin-bottom:0}
+.tier-row:hover{border-color:var(--line)}
+.tier-row .lbl{font-size:13.5px;color:var(--txt-2);line-height:1.35}
+.tier-row .lbl b{color:var(--txt)}
+.tier-row .sub{display:block;font-size:11.5px;color:var(--txt-3);margin-top:3px}
+.tier-row .sub b{color:var(--txt-2);font-weight:700}
+.tier-row .dot{width:20px;height:20px;flex:0 0 20px;border:1.5px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:.15s}
+.tier-row.active{border-color:var(--lime)}
+.tier-row.active .dot{border-color:var(--lime)}
+.tier-row.active .dot::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--lime)}
+.check-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg);
+  border:1.5px solid var(--line-soft);border-radius:14px;padding:14px 16px;cursor:pointer;transition:.15s}
+.check-row:has(input:checked){border-color:var(--lime)}
+.check-row input{position:absolute;opacity:0;pointer-events:none}
+.check-row .lbl{font-size:13.5px;color:var(--txt-2);line-height:1.35}
+.check-row .lbl b{color:var(--txt)}
+.check-row .box{width:24px;height:24px;flex:0 0 24px;border:1.5px solid var(--line);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;transition:.15s}
+.check-row input:checked ~ .box{background:var(--lime);border-color:var(--lime)}
+.check-row input:checked ~ .box::after{content:"✓";color:#0A0A0A;font-size:13px;font-weight:900}
+.stepper{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg);
+  border:1px solid var(--line-soft);border-radius:14px;padding:11px 16px}
+.stepper .lbl{font-size:13.5px;color:var(--txt-2)}
+.stepper .lbl b{color:var(--txt)}
+.stepper-ctl{display:flex;align-items:center;gap:14px}
+.stepper-btn{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:transparent;
+  color:var(--txt);font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s;
+  display:flex;align-items:center;justify-content:center}
+.stepper-btn:hover{border-color:var(--lime);color:var(--lime)}
+.stepper-val{font-weight:800;font-size:16px;min-width:18px;text-align:center;font-variant-numeric:tabular-nums}
+
+/* ---- Ticket (resumen) ---- */
+.ticket{background:var(--bg);border:1.5px solid rgba(217,244,95,.45);border-radius:18px;overflow:hidden;height:fit-content}
+.ticket-head{background:rgba(217,244,95,.12);color:var(--lime);font-weight:800;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;padding:13px 20px;border-bottom:1px dashed rgba(217,244,95,.35)}
+.ticket-body{padding:20px}
+.t-total{padding-bottom:16px;border-bottom:1px dashed var(--line);margin-bottom:14px}
+.t-total .t-cap{font-size:12.5px;color:var(--txt-2);margin-bottom:6px}
+.t-total .big{font-size:clamp(28px,4.5vw,36px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.t-total .t-sub{font-size:11.5px;color:var(--txt-3);margin-top:6px;line-height:1.5}
+.t-items-cap{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-3);font-weight:700;margin-bottom:8px}
+.t-line{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:9px 0;
+  border-bottom:1px dashed var(--line-soft);font-size:13px;color:var(--txt-2)}
+.t-line:last-child{border-bottom:0}
+.t-line .t-amt{font-weight:800;color:var(--txt);white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
+.t-line .t-amt small{display:block;font-size:10.5px;color:var(--txt-3);font-weight:600}
+.save-badge{display:inline-flex;font-size:11.5px;font-weight:800;color:var(--lime);
+  background:rgba(217,244,95,.1);border:1px solid rgba(217,244,95,.2);border-radius:999px;padding:6px 12px;margin-top:12px}
+.calc-note{margin-top:16px;font-size:11px;color:var(--txt-3);line-height:1.5}
+.calc-note b{color:var(--txt-2)}
+.calc-cta{margin-top:18px}
+
+/* ===== Qué NO incluye ===== */
+.tick{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tick li{position:relative;padding-left:16px;font-size:13.5px;color:var(--txt-2);line-height:1.4}
+.tick li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--txt-3)}
+
+/* ===== Cierre ===== */
+.porque{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.pq{padding:16px 18px;border-left:2px solid var(--lime);background:var(--bg-2);border-radius:0 var(--r-sm) var(--r-sm) 0}
+.pq h4{font-size:13.5px;margin-bottom:4px}
+.pq p{font-size:12.5px;color:var(--txt-2)}
+.pasos-line{font-size:13.5px;color:var(--txt-2);background:var(--bg-2);border:1px solid var(--line);
+  border-radius:var(--r-sm);padding:14px 18px}
+.pasos-line b{color:var(--txt)}
+
+.firma{text-align:center;color:var(--txt-3);font-size:13px}
+.firma b{display:block;color:var(--txt);font-size:15px;font-weight:800;margin-bottom:4px}
+
+@media(max-width:860px){
+  .price-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+  .porque{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr;max-width:340px;margin:0 auto}
+  .flow-step:not(:last-child)::after{content:"↓";top:auto;bottom:-14px;right:auto;left:50%;transform:translate(-50%,0)}
+  .calc-grid{grid-template-columns:1fr}
+}
+@media print{
+  @page{margin:14mm}
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+  html,body{background:var(--bg) !important}
+  body::after{display:none !important}
+  .price-grid{grid-template-columns:repeat(3,1fr)}
+  .flow{grid-template-columns:repeat(5,1fr)}
+  .btn{display:none !important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="hook">
+    <div class="hook-inner">
+      <div class="eyebrow">MT AGRO · Chimpancé Digital</div>
+      <p class="hook-line">
+        <span class="dim">Ahora mismo, alguien en Córdoba está buscando "sistema de riego por goteo" en Google.</span>
+        <span class="glow">Esa consulta puede llegarle a MT AGRO — o a la competencia.</span>
+      </p>
+    </div>
+  </section>
+
+  <header class="top">
+    <div class="eyebrow">Chimpancé Digital · MT AGRO · Agosto 2026</div>
+    <h1>Google Ads + Página Web</h1>
+    <p class="lead">Para que el productor que busca riego, maquinaria, bombas solares o pasturas en Google encuentre a MT AGRO primero, y la consulta llegue directo por WhatsApp. La página web y la gestión de Google Ads se cotizan por separado: pueden contratar una, la otra, o las dos.</p>
+    <span class="scope-badge">📍 Segmentación exclusiva: ciudad de Córdoba</span>
+  </header>
+
+  <section class="trust">
+    <div class="trust-label">Referentes del sector agropecuario</div>
+    <div class="trust-logos">
+      <div class="logo-badge">AAPRESID</div>
+      <div class="logo-badge">MOLINOS AGRO</div>
+      <div class="logo-badge">EXPONENCIAR</div>
+    </div>
+  </section>
+
+  <!-- ===== MAPA DEL FLUJO ===== -->
+  <section class="flujo">
+    <div class="sec-head">
+      <div class="eyebrow">Cómo funciona</div>
+      <h2>El camino de la consulta, en 5 pasos</h2>
+      <p>De la búsqueda en Google al WhatsApp de MT AGRO — y cada consulta queda registrada.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step"><span class="n">1</span><span><b>El productor busca</b><br>"riego por goteo" en Google</span></div>
+      <div class="flow-step"><span class="n">2</span><span><b>Ve el anuncio</b><br>MT AGRO aparece primero</span></div>
+      <div class="flow-step"><span class="n">3</span><span><b>Entra a la web</b><br>ve los productos en el celular</span></div>
+      <div class="flow-step"><span class="n">4</span><span><b>Escribe por WhatsApp</b><br>con un solo toque</span></div>
+      <div class="flow-step last"><span class="n">5</span><span><b>La consulta queda en el CRM</b><br>centralizada y medida</span></div>
+    </div>
+  </section>
+
+  <!-- ===== WEB ONE PAGE + CRM ===== -->
+  <section class="landing-offer">
+    <div class="sec-head">
+      <div class="eyebrow">Aparte · pago único o 6 cuotas</div>
+      <h2>Página Web One Page + CRM</h2>
+      <p>La página que recibe el clic y lo convierte en consulta, más un pequeño CRM para que ninguna consulta se pierda: todas quedan centralizadas, con su origen y su estado, y se puede medir qué genera la campaña.</p>
+    </div>
+    <div class="landing-card">
+      <div class="price-name">Web One Page + CRM</div>
+      <div class="price-desc">Riego, maquinaria, bombas solares y pasturas en una sola página, con botón de WhatsApp y panel de consultas.</div>
+      <div class="price-num"><span class="usd">USD 850</span><span class="per">pago único</span></div>
+      <div class="price-iva">+ IVA (21%) · o en 6 cuotas sin interés de USD 142/mes</div>
+      <ul class="price-list landing-list">
+        <li class="yes"><span class="ico">✓</span><span>Los 4 productos en una sola página, pensada para el celular</span></li>
+        <li class="yes"><span class="ico">✓</span><span>Botón de WhatsApp en toda la página</span></li>
+        <li class="yes"><span class="ico">✓</span><span><b>CRM simple</b>: todas las consultas centralizadas, con origen y estado</span></li>
+        <li class="yes"><span class="ico">✓</span><span>Medición: saben cuántas consultas generó la campaña y cuáles se cerraron</span></li>
+        <li class="no"><span class="ico">–</span><span>Hosting y dominio (no incluidos)</span></li>
+      </ul>
+      <a href="https://wa.me/5493516503470?text=Hola%20Chimpanc%C3%A9%2C%20quiero%20avanzar%20con%20la%20Web%20One%20Page%20%2B%20CRM%20de%20la%20propuesta%20de%20MT%20AGRO." target="_blank" rel="noopener" class="btn btn-primary">Quiero la web</a>
+      <div class="price-fine">Página de producto adicional: <b>+USD 400</b> c/u (pago único).</div>
+    </div>
+  </section>
+
+  <!-- ===== NIVELES DE GOOGLE ADS ===== -->
+  <section class="pricing">
+    <div class="sec-head">
+      <div class="eyebrow">Elegí tu nivel</div>
+      <h2>3 formas de invertir en Google Ads</h2>
+      <p>Gestión de la campaña — no incluye la web (se cotiza aparte, arriba). La diferencia entre niveles es cuánto se invierte en pauta y la cobertura de palabras clave. Contrato de 6 meses (1 de setup + 5 de gestión) · segmentación exclusiva para la ciudad de Córdoba.</p>
+    </div>
+
+    <div class="price-grid">
+
+      <!-- ESENCIAL -->
+      <div class="price-card">
+        <span class="price-off">-20% contado</span>
+        <div class="price-name">Esencial</div>
+        <div class="price-desc">Para arrancar con foco en el producto de mayor demanda.</div>
+        <div class="price-num"><span class="usd">USD 450</span><span class="per">/mes</span></div>
+        <div class="price-iva">+ IVA (21%)</div>
+        <div class="price-ads">+ <b>$600.000/mes</b> en Google Ads · Ciudad de Córdoba (aparte, directo a Google)</div>
+        <a href="https://wa.me/5493516503470?text=Hola%20Chimpanc%C3%A9%2C%20quiero%20avanzar%20con%20el%20nivel%20Esencial%20de%20la%20propuesta%20de%20MT%20AGRO." target="_blank" rel="noopener" class="btn btn-ghost">Elegir Esencial</a>
+        <ul class="price-list">
+          <li class="no"><span class="ico">–</span><span>Web One Page + CRM (se cotiza aparte)</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Cuenta de Google Ads configurada</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Cobertura: <b>1 producto</b>, el de mayor demanda</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Anuncios redactados</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Informe mensual</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Ajustes de optimización mensuales</span></li>
+        </ul>
+      </div>
+
+      <!-- RECOMENDADO -->
+      <div class="price-card featured">
+        <span class="price-badge">★ Recomendado</span>
+        <span class="price-off">-20% contado</span>
+        <div class="price-name">Recomendado</div>
+        <div class="price-desc">Los 2 productos de mayor demanda, con optimización constante.</div>
+        <div class="price-num"><span class="usd">USD 550</span><span class="per">/mes</span></div>
+        <div class="price-iva">+ IVA (21%)</div>
+        <div class="price-ads">+ <b>$900.000/mes</b> en Google Ads · Ciudad de Córdoba (aparte, directo a Google)</div>
+        <a href="https://wa.me/5493516503470?text=Hola%20Chimpanc%C3%A9%2C%20quiero%20avanzar%20con%20el%20nivel%20Recomendado%20de%20la%20propuesta%20de%20MT%20AGRO." target="_blank" rel="noopener" class="btn btn-primary">Elegir Recomendado</a>
+        <ul class="price-list">
+          <li class="no"><span class="ico">–</span><span>Web One Page + CRM (se cotiza aparte)</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Cuenta de Google Ads configurada</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Cobertura: <b>2 productos</b></span></li>
+          <li class="yes"><span class="ico">✓</span><span>Anuncios redactados</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Informe mensual</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Ajustes de optimización mensuales</span></li>
+        </ul>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="price-card">
+        <span class="price-off">-20% contado</span>
+        <div class="price-name">Premium</div>
+        <div class="price-desc">Los 4 productos, con ajustes todas las semanas.</div>
+        <div class="price-num"><span class="usd">USD 650</span><span class="per">/mes</span></div>
+        <div class="price-iva">+ IVA (21%)</div>
+        <div class="price-ads">+ <b>$1.200.000/mes</b> en Google Ads · Ciudad de Córdoba (aparte, directo a Google)</div>
+        <a href="https://wa.me/5493516503470?text=Hola%20Chimpanc%C3%A9%2C%20quiero%20avanzar%20con%20el%20nivel%20Premium%20de%20la%20propuesta%20de%20MT%20AGRO." target="_blank" rel="noopener" class="btn btn-ghost">Elegir Premium</a>
+        <ul class="price-list">
+          <li class="no"><span class="ico">–</span><span>Web One Page + CRM (se cotiza aparte)</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Cuenta de Google Ads configurada</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Cobertura: <b>los 4 productos</b></span></li>
+          <li class="yes"><span class="ico">✓</span><span>Anuncios redactados</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Informe mensual ampliado</span></li>
+          <li class="yes"><span class="ico">✓</span><span>Ajustes de optimización <b>semanales</b></span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="addon-note">¿Ya tienen una web propia? Arrancamos directo con la gestión de Google Ads.</p>
+  </section>
+
+  <!-- ===== CALCULADORA ===== -->
+  <section class="calculadora" id="calculadora">
+    <div class="sec-head">
+      <div class="eyebrow">El número final, sin sorpresas</div>
+      <h2>¿Cuánto pagan por mes?</h2>
+      <p>Cuatro decisiones simples a la izquierda — y a la derecha se arma la cuenta, como un ticket.</p>
+    </div>
+
+    <div class="calc">
+      <div class="calc-grid">
+        <div class="calc-controls">
+          <div class="calc-group">
+            <div class="calc-label"><span class="n">1</span> ¿Qué nivel de campaña eligen?</div>
+            <div id="tierSeg">
+              <div class="tier-row" data-tier="esencial">
+                <span class="lbl"><b>Esencial</b> — 1 producto
+                  <span class="sub">Pauta a Google: <b>$600.000/mes</b> · Gestión Chimpancé: <b>USD 450/mes</b></span>
+                </span>
+                <span class="dot"></span>
+              </div>
+              <div class="tier-row active" data-tier="recomendado">
+                <span class="lbl"><b>Recomendado ★</b> — 2 productos
+                  <span class="sub">Pauta a Google: <b>$900.000/mes</b> · Gestión Chimpancé: <b>USD 550/mes</b></span>
+                </span>
+                <span class="dot"></span>
+              </div>
+              <div class="tier-row" data-tier="premium">
+                <span class="lbl"><b>Premium</b> — los 4 productos
+                  <span class="sub">Pauta a Google: <b>$1.200.000/mes</b> · Gestión Chimpancé: <b>USD 650/mes</b></span>
+                </span>
+                <span class="dot"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-group">
+            <div class="calc-label"><span class="n">2</span> ¿Suman la página web con CRM?</div>
+            <label class="check-row">
+              <input type="checkbox" id="chkWeb" checked>
+              <span class="lbl"><b>Sí, quiero la web</b> — USD 850, en 6 cuotas de USD 142</span>
+              <span class="box"></span>
+            </label>
+          </div>
+
+          <div class="calc-group">
+            <div class="calc-label"><span class="n">3</span> ¿Páginas de producto adicionales?</div>
+            <div class="stepper">
+              <span class="lbl"><b>+USD 400</b> cada una, también en 6 cuotas</span>
+              <span class="stepper-ctl">
+                <button type="button" class="stepper-btn" id="pageMinus">−</button>
+                <span class="stepper-val" id="pageCount">0</span>
+                <button type="button" class="stepper-btn" id="pagePlus">+</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="calc-group">
+            <div class="calc-label"><span class="n">4</span> ¿Cómo prefieren pagar?</div>
+            <div class="seg" id="paySeg">
+              <button type="button" class="seg-btn active" data-mode="financiado">Mes a mes<small>6 cuotas sin interés</small></button>
+              <button type="button" class="seg-btn" data-mode="contado">Todo junto al inicio<small><span class="off">20% de descuento</span></small></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ticket">
+          <div class="ticket-head">Así queda la cuenta</div>
+          <div class="ticket-body" id="calcResult"></div>
+        </div>
+      </div>
+
+      <div class="calc-note" id="calcNote"></div>
+      <div class="calc-cta">
+        <a href="https://wa.me/5493516503470?text=Hola%20Chimpanc%C3%A9%2C%20arm%C3%A9%20mi%20combinaci%C3%B3n%20en%20la%20propuesta%20de%20MT%20AGRO%20y%20quiero%20avanzar." target="_blank" rel="noopener" class="btn btn-primary">Quiero avanzar con esta combinación</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="noincluye">
+    <div class="sec-head">
+      <div class="eyebrow">Para que quede claro</div>
+      <h2>Qué NO incluye</h2>
+    </div>
+    <ul class="tick">
+      <li>La web dentro de los niveles de Google Ads — es un ítem aparte (ver arriba)</li>
+      <li>Hosting y dominio de la web</li>
+      <li>Fotos y videos de los productos</li>
+      <li>La inversión en Google Ads (la abona MT AGRO directo a Google)</li>
+      <li>Google Display, Performance Max o Meta Ads — quedan para una fase futura</li>
+      <li>Mantenimiento luego de la garantía de 2 meses</li>
+    </ul>
+  </section>
+
+  <section class="cierre">
+    <div class="porque">
+      <div class="pq"><h4>Garantía de 2 meses</h4><p>Después de publicada la web, corregimos errores y ajustes sin costo.</p></div>
+      <div class="pq"><h4>Autonomía total</h4><p>Al final, MT AGRO recibe accesos, código y documentación. No queda atado a Chimpancé.</p></div>
+    </div>
+    <div class="pasos-line"><b>Para arrancar:</b> eligen la combinación → coordinamos el kick off (30 min) → arrancamos el mes de setup.</div>
+  </section>
+
+  <div class="firma">
+    <b>Chimpancé Digital</b>
+    La evolución digital que tu empresa necesita
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var TIERS = {
+    esencial:    {label:'Esencial',    ads:600000,  fee:450},
+    recomendado: {label:'Recomendado', ads:900000,  fee:550},
+    premium:     {label:'Premium',     ads:1200000, fee:650}
+  };
+  var WEB = 850;
+  var PAGE_EXTRA = 400;
+  var MESES = 6;
+  var CONTADO_OFF = 0.20;
+  var COTIZACION = 1525; // dólar blue venta — fallback; se actualiza desde DolarAPI
+
+  var selectedTier = 'recomendado';
+  var mode = 'financiado';
+  var pages = 0;
+
+  var fmt = function(n){ return Math.round(n).toLocaleString('es-AR'); };
+  var arsFromUsd = function(usd){ return '$' + fmt(usd * COTIZACION); };
+  var arsPlain = function(n){ return '$' + fmt(n); };
+
+  var tierBtns = Array.prototype.slice.call(document.querySelectorAll('#tierSeg .tier-row'));
+  var payBtns  = Array.prototype.slice.call(document.querySelectorAll('#paySeg .seg-btn'));
+  var chkWeb   = document.getElementById('chkWeb');
+  var pageEl   = document.getElementById('pageCount');
+  var result   = document.getElementById('calcResult');
+  var note     = document.getElementById('calcNote');
+
+  function render(){
+    var t = TIERS[selectedTier];
+    var webTotal = (chkWeb.checked ? WEB : 0) + pages * PAGE_EXTRA;
+    var honorarios6m = t.fee * MESES + webTotal;   // todo lo que factura Chimpancé en 6 meses
+    var html = '';
+
+    if(mode === 'financiado'){
+      var webCuota = webTotal / MESES;
+      var usdMes = t.fee + webCuota;               // honorarios mensuales + cuota de la web
+      var totalMesArs = usdMes * COTIZACION + t.ads;
+
+      html += '<div class="t-total">' +
+              '<div class="t-cap">Cada mes, durante 6 meses, pagan en total:</div>' +
+              '<div class="big">≈ ' + arsPlain(totalMesArs) + '</div>' +
+              '<div class="t-sub">+ IVA (21%) sobre el trabajo de Chimpancé. Después del mes 6, la web ya está paga: queda solo la pauta y la gestión si continúan.</div>' +
+              '</div>';
+      html += '<div class="t-items-cap">Ese número incluye</div>';
+      if(webTotal > 0){
+        html += '<div class="t-line"><span>La web' + (pages ? ' (+' + pages + ' pág. de producto)' : '') + ', en 6 cuotas</span>' +
+                '<span class="t-amt">' + arsFromUsd(webCuota) + '<small>USD ' + fmt(webCuota) + '/mes</small></span></div>';
+      }
+      html += '<div class="t-line"><span>El trabajo de Chimpancé sobre la campaña</span>' +
+              '<span class="t-amt">' + arsFromUsd(t.fee) + '<small>USD ' + fmt(t.fee) + '/mes</small></span></div>';
+      html += '<div class="t-line"><span>La pauta, que se paga directo a Google</span>' +
+              '<span class="t-amt">' + arsPlain(t.ads) + '<small>por mes</small></span></div>';
+
+      note.innerHTML = 'El trabajo de Chimpancé y la web se cotizan en USD <b>+ IVA (21%)</b> y acá se muestran en pesos al dólar blue de hoy, <b id="rate">$' + fmt(COTIZACION) + '</b> (se actualiza solo). La pauta se paga en pesos, directo a Google, y Google emite factura A.';
+    } else {
+      var contado = honorarios6m * (1 - CONTADO_OFF);
+      var ahorro = honorarios6m - contado;
+
+      html += '<div class="t-total">' +
+              '<div class="t-cap">Un solo pago al inicio, con 20% de descuento:</div>' +
+              '<div class="big">USD ' + fmt(contado) + '</div>' +
+              '<div class="t-sub">≈ ' + arsFromUsd(contado) + ' + IVA (21%). Cubre la web y los 6 meses de trabajo de Chimpancé.</div>' +
+              '<div class="save-badge">Se ahorran USD ' + fmt(ahorro) + '</div>' +
+              '</div>';
+      html += '<div class="t-items-cap">Y después, mes a mes</div>';
+      html += '<div class="t-line"><span>Solo la pauta, que se paga directo a Google</span>' +
+              '<span class="t-amt">' + arsPlain(t.ads) + '<small>por mes</small></span></div>';
+
+      note.innerHTML = 'El trabajo de Chimpancé y la web se cotizan en USD <b>+ IVA (21%)</b> y acá se muestran en pesos al dólar blue de hoy, <b id="rate">$' + fmt(COTIZACION) + '</b> (se actualiza solo). El descuento aplica sobre el trabajo de Chimpancé y la web; la pauta no lleva descuento porque va directo a Google.';
+    }
+    result.innerHTML = html;
+  }
+
+  tierBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      tierBtns.forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      selectedTier = b.dataset.tier;
+      render();
+    });
+  });
+  payBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      payBtns.forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      mode = b.dataset.mode;
+      render();
+    });
+  });
+  chkWeb.addEventListener('change', function(){
+    if(!chkWeb.checked){ pages = 0; pageEl.textContent = pages; }  // las páginas extra son de la web
+    render();
+  });
+  document.getElementById('pageMinus').addEventListener('click', function(){
+    pages = Math.max(0, pages - 1); pageEl.textContent = pages; render();
+  });
+  document.getElementById('pagePlus').addEventListener('click', function(){
+    if(!chkWeb.checked){ chkWeb.checked = true; }                  // sumar páginas implica tener la web
+    pages = Math.min(4, pages + 1); pageEl.textContent = pages; render();
+  });
+  render();
+
+  function fetchDolar(){
+    fetch('https://dolarapi.com/v1/dolares/blue', {cache:'no-store'})
+      .then(function(r){ return r.json(); })
+      .then(function(d){ if(d && d.venta){ COTIZACION = d.venta; render(); } })
+      .catch(function(){});
+  }
+  fetchDolar();
+  setInterval(fetchDolar, 10 * 60 * 1000);
+})();
+</script>
+</body>
+</html>
