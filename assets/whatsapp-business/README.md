@@ -18,3 +18,15 @@ Archivos:
 El isotipo ocupa el centro del lienzo con margen suficiente para que el recorte circular no lo corte.
 
 Para subirlo: WhatsApp Business → Configuración → Herramientas para la empresa → Perfil de empresa → foto.
+
+## Logo estilo WhatsApp
+
+Globo de chat (el gesto visual de WhatsApp) con la cara del mono adentro. No usa el teléfono del logo oficial de WhatsApp: es marca registrada de Meta y sus guías no permiten modificarlo.
+
+| Variante | Descripción | Uso sugerido |
+|---|---|---|
+| `logo-azul` | Globo blanco delineado sobre fondo azul redondeado | Ícono tipo app, botones de contacto, redes |
+| `logo-blanco` | Globo azul delineado sobre fondo blanco redondeado | Fondos oscuros o fotos |
+| `logo-globo` | Globo azul relleno, fondo transparente | Botón flotante de WhatsApp en la web, firmas de mail |
+
+Archivos: `whatsapp-chimpance-logo-<variante>.svg` y PNG en 640 y 1024 (`preview-logo.png` muestra las tres).
