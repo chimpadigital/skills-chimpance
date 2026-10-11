@@ -19,14 +19,16 @@ El isotipo ocupa el centro del lienzo con margen suficiente para que el recorte 
 
 Para subirlo: WhatsApp Business → Configuración → Herramientas para la empresa → Perfil de empresa → foto.
 
-## Logo estilo WhatsApp
+## Ícono de WhatsApp con colores Chimpancé
 
-Globo de chat (el gesto visual de WhatsApp) con la cara del mono adentro. No usa el teléfono del logo oficial de WhatsApp: es marca registrada de Meta y sus guías no permiten modificarlo.
+El ícono clásico de WhatsApp (globo con teléfono) en el azul `#36a9e1` y el negro de la marca. El teléfono es el ícono "call" de Material Icons (licencia Apache 2.0).
 
 | Variante | Descripción | Uso sugerido |
 |---|---|---|
-| `logo-azul` | Globo blanco delineado sobre fondo azul redondeado | Ícono tipo app, botones de contacto, redes |
-| `logo-blanco` | Globo azul delineado sobre fondo blanco redondeado | Fondos oscuros o fotos |
-| `logo-globo` | Globo azul relleno, fondo transparente | Botón flotante de WhatsApp en la web, firmas de mail |
+| `wa-azul` | Globo y teléfono blancos sobre fondo azul redondeado | Ícono tipo app, botones de contacto |
+| `wa-negro` | Globo y teléfono azules sobre fondo negro redondeado | Fondos claros, piezas en negro |
+| `wa-globo` | Globo azul relleno con borde blanco, fondo transparente | Botón flotante de WhatsApp en la web, firmas de mail |
 
-Archivos: `whatsapp-chimpance-logo-<variante>.svg` y PNG en 640 y 1024 (`preview-logo.png` muestra las tres).
+Archivos: `whatsapp-chimpance-wa-<variante>.svg` y PNG en 640 y 1024 (`preview-whatsapp.png` muestra las tres).
+
+Las guías de marca de Meta piden usar el logo de WhatsApp en su verde original. Estas versiones son para piezas propias (web, firmas, redes); no las uses en material que hable en nombre de WhatsApp.
