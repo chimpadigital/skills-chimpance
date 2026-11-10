@@ -37,6 +37,7 @@ O por proyecto (en `.claude/settings.json` del repo):
 | `security-review` | Checklist OWASP general para cualquier stack |
 | `security-best-practices` | Best practices por lenguaje/framework con reporte de vulnerabilidades |
 | `claude-seo` | Auditoría SEO técnica completa |
+| `web-scraping` | Elegir e instalar Scrapling, ScrapeGraphAI o Agent Reach para extraer datos web con Claude Code |
 
 Cada skill tiene un `CHANGELOG.md` con las modificaciones respecto al original.
 
