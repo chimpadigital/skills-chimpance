@@ -6,27 +6,29 @@ Versiones mejoradas de skills de la comunidad, enriquecidas con lecciones aprend
 
 ## Instalación
 
-Clonar el repo una vez por máquina:
+El repo es un plugin de Claude Code con su propio marketplace (`.claude-plugin/`). No hace falta clonarlo: Claude Code lo baja solo.
 
-```bash
-git clone https://github.com/chimpadigital/skills-chimpance.git ~/.agents/skills-chimpance
-```
-
-Luego agregar en `~/.claude/settings.json`:
+Agregar en `~/.claude/settings.json` (vale para todas las sesiones de esa compu, terminal y app de escritorio):
 
 ```json
 {
-  "skillsDirectories": ["~/.agents/skills-chimpance/skills"]
+  "extraKnownMarketplaces": {
+    "chimpance": {
+      "source": { "source": "github", "repo": "chimpadigital/skills-chimpance" },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": { "chimpance-skills@chimpance": true }
 }
 ```
 
-O por proyecto (en `.claude/settings.json` del repo):
+Para seguir una rama que no es `main`, sumar `"ref": "<rama>"` dentro de `source`.
 
-```json
-{
-  "skillsDirectories": [".agents/skills-chimpance/skills"]
-}
-```
+O desde una sesión: `/plugin marketplace add chimpadigital/skills-chimpance` y después `/plugin install chimpance-skills@chimpance`.
+
+Las skills quedan con prefijo (`/chimpance-skills:web-scraping`, `/chimpance-skills:security-review`, etc.) y Claude las activa solo por la descripción.
+
+> `skillsDirectories` **no existe** en Claude Code: no lo uses.
 
 ## Skills disponibles
 
@@ -43,6 +45,4 @@ Cada skill tiene un `CHANGELOG.md` con las modificaciones respecto al original.
 
 ## Actualizar
 
-```bash
-cd ~/.agents/skills-chimpance && git pull
-```
+Con `"autoUpdate": true` se actualiza solo al abrir una sesión. Para forzarlo: `/plugin marketplace update chimpance` y después `/reload-plugins`.

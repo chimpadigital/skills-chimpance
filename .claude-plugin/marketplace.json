@@ -1,0 +1,12 @@
+{
+  "name": "chimpance",
+  "description": "Skills del equipo de Chimpancé Digital",
+  "owner": { "name": "Chimpancé Digital" },
+  "plugins": [
+    {
+      "name": "chimpance-skills",
+      "source": "./",
+      "description": "Skills del equipo de Chimpancé Digital"
+    }
+  ]
+}
